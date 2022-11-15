@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotesFragment">
+
+    <LinearLayout
+        android:id="@+id/texts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/notes_date_landscape"
+            style="@style/StyleText"/>
+
+        <TextView
+            android:id="@+id/notes_time_landscape"
+            style="@style/StyleText" />
+
+        <ScrollView
+            android:id="@+id/scroll_list_names"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
+
+            <HorizontalScrollView
+                android:id="@+id/hscroll"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/notes_name_landscape"
+                    style="@style/StyleText"
+                    android:layout_width="wrap_content"
+                    android:isScrollContainer="true" />
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/scroll_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/notes_description_landscape"
+                style="@style/StyleText" />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/change_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            style="@style/StylePicker"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            style="@style/StylePicker"
+            android:timePickerMode="spinner" />
+
+        <Button
+            android:id="@+id/date_time_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/OK" />
+    </LinearLayout>
+
+</FrameLayout>

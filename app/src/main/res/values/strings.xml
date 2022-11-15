@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name">Notepad</string>
+    <string name="notes">Notepad</string>
+    <string name="OK">Выйти</string>
 </resources>

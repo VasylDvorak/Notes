@@ -1,31 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?><!-- это макет для альбомной ориентации -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <ScrollView
-        android:id="@+id/scroll_list_names"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:scrollbars="vertical">
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
-
-    <View
-        android:layout_width="5mm"
-        android:layout_height="1sp" />
-    <!-- Здесь будет выбранная заметка -->
     <FrameLayout
         android:id="@+id/notes_container"
         android:layout_width="0px"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?android:attr/detailsElementBackground" />
+        android:layout_weight="1" />
+
+    <View
+        android:id="@+id/void_view"
+        android:layout_width="5mm"
+        android:layout_height="1sp" />
+
+    <FrameLayout
+        android:id="@+id/note_container"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5" />
+
 </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

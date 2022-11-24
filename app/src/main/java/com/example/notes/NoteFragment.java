@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class NoteFragment extends Fragment {
 
     static final String SELECTED_NOTE = "note";
+    static int PDateTime;
     boolean title_was_changed;
     private Note note;
 
@@ -76,25 +77,15 @@ public class NoteFragment extends Fragment {
                         int k = 1;
                         rt = getActivity().findViewById(k);
                     }
-                    rt.setText(note.getTitle());
+                    if (PDateTime == 0)
+                        rt.setText(note.getTitle());
                 }
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-
-
                 }
             });
 
-            Button buttonBack = view.findViewById(R.id.btnBack);
-            if (buttonBack != null)
-                buttonBack.setOnClickListener(view1 -> {
-                    if (title_was_changed) {
-                        TextView rt = getActivity().findViewById(note.getId());
-                        rt.setText(note.getTitle());
-                    }
-                    requireActivity().getSupportFragmentManager().popBackStack();
-                });
 
             time_date_alarm.setText(note.getTimeDateAlarm());
             tvDescription.setText(note.getDescription());
@@ -115,6 +106,15 @@ public class NoteFragment extends Fragment {
             time_date_alarm.setOnClickListener(view1 -> {
                 showCorrectDateTime(note);
             });
+            Button buttonBack = view.findViewById(R.id.btnBack);
+            if (buttonBack != null)
+                buttonBack.setOnClickListener(view1 -> {
+                    if (title_was_changed) {
+                        TextView rt = getActivity().findViewById(note.getId());
+                        rt.setText(note.getTitle());
+                    }
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                });
         }
     }
 

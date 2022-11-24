@@ -1,6 +1,8 @@
 package com.example.notes;
 
 
+import static com.example.notes.NoteFragment.PDateTime;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +58,7 @@ public class ParentDateTimeFragment extends Fragment {
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         return myFragment;
+
     }
 
     @Override
@@ -83,15 +86,17 @@ public class ParentDateTimeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         Bundle arguments = getArguments();
         if (arguments != null) {
 
             note = arguments.getParcelable(SELECTED_NOTE);
         }
-
+        PDateTime = 1;
         Button Parent_button_back = view.findViewById(R.id.parent_button_back);
         if (Parent_button_back != null)
             Parent_button_back.setOnClickListener(view1 -> {
+                PDateTime = 0;
                 requireActivity().getSupportFragmentManager().popBackStack();
             });
     }

@@ -107,8 +107,17 @@ public class NotesFragment extends Fragment {
                 v.setBackgroundResource(R.color.set_text_block);
                 v.invalidate();
                 showNoteDetails(Note.getNotes()[index]);
-
             });
+
+            if ((previous_position == 0) && (isLandscape())) {
+
+                previous_position = 1;
+                TextView text_prev = layoutView.findViewById(previous_position);
+                text_prev.setBackgroundResource(R.color.set_text_block);
+                text_prev.invalidate();
+                showNoteDetails(Note.getNotes()[0]);
+            }
+
         }
     }
 

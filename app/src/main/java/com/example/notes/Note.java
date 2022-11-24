@@ -64,11 +64,15 @@ public class Note implements Parcelable {
         return notes;
     }
 
+
     @SuppressLint("DefaultLocale")
     public static Note getNote(int index) {
         String title = String.format("Заметка %d", index);
         String description = String.format("Описание заметки %d", index);
-        LocalDateTime creationDate = LocalDateTime.now().plusDays(-random.nextInt(5));
+        LocalDateTime creationDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            creationDate = LocalDateTime.now().plusDays(-random.nextInt(5));
+        }
         int[] date = new int[]{random.nextInt(31) + 1, random.nextInt(11) + 1, 2023 + random.nextInt(2)};
         int[] time = new int[]{random.nextInt(24) + 1, random.nextInt(60) + 1};
         return new Note(title, description, creationDate, date, time);

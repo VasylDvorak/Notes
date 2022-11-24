@@ -1,20 +1,31 @@
 package com.example.notes;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 
 public class NoteFragment extends Fragment {
 
@@ -47,6 +58,7 @@ public class NoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_note, container, false);
     }
 
@@ -103,8 +115,10 @@ public class NoteFragment extends Fragment {
                 public void afterTextChanged(Editable editable) {
                 }
             });
-            time_date_alarm.setOnClickListener(view1 -> {
-                showCorrectDateTime(note);
+            time_date_alarm.setOnLongClickListener(view1 -> {
+                initDateTimePopupMenu(time_date_alarm);
+
+                return true;
             });
             Button buttonBack = view.findViewById(R.id.btnBack);
             if (buttonBack != null)
@@ -118,7 +132,37 @@ public class NoteFragment extends Fragment {
         }
     }
 
+
+
+    private void initDateTimePopupMenu(TextView view){
+            Activity activity = requireActivity();
+            PopupMenu popupMenu = new PopupMenu(activity,view );
+            activity.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        MenuItem item = popupMenu.getMenu().findItem(R.id.action_popup_delete);
+        if (item != null ) {
+            item.setVisible(false);}
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    if (menuItem.getItemId() == R.id.action_popup_correct){
+                        showCorrectDateTime(note);
+                    }
+                    return true;
+                }
+            });
+            popupMenu.show();
+
+    }
+
+
+
+
+
+
+
+
     private void showCorrectDateTime(Note note) {
+
         this.note = note;
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
@@ -134,7 +178,7 @@ public class NoteFragment extends Fragment {
                 requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.notes_container, parentDateTimeFragment);
+        fragmentTransaction.replace(R.id.notes_container, parentDateTimeFragment, "PARENT_FRAGMENT");
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
@@ -149,5 +193,63 @@ public class NoteFragment extends Fragment {
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
+
+        Fragment CurrentFragment = (Fragment) requireActivity().getSupportFragmentManager().findFragmentByTag("NOTE_FRAGMENT");
+
+                    if((getResources().getConfiguration().orientation
+                            == Configuration.ORIENTATION_PORTRAIT)&&(menu != null )&&
+                            ( CurrentFragment != null && CurrentFragment.isVisible())) {
+                        menu.clear();
+
+                        inflater.inflate(R.menu.note_fragment_menu, menu);
+                    }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( @NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.send_note:
+                // Сделать поиск
+                createOneButtonAlertDialog("Сделать отослать заметку");
+                return true ;
+            case R.id.add_photo:
+                createOneButtonAlertDialog("Сделать добавить фото");
+                return true ;
+        }
+        return super .onOptionsItemSelected(item);
+    }
+
+
+    private boolean isLandscape() {
+        return getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+
+    private void createOneButtonAlertDialog(String title_window) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title_window)
+                .setMessage(R.string.version)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        Dialog d = builder.show();
+        int textViewId = d.getContext().getResources().getIdentifier("android:id/alertTitle", null, null);
+        TextView tv = d.findViewById(textViewId);
+        tv.setTextColor(getResources().getColor(R.color.set_text_toast));
+        tv.setBackgroundColor(getResources().getColor(R.color.teal_200));
+        textViewId = d.getContext().getResources().getIdentifier("android:id/message", null, null);
+        tv = d.findViewById(textViewId);
+        tv.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        textViewId = d.getContext().getResources().getIdentifier("android:id/button1", null, null);
+        Button b = d.findViewById(textViewId);
+        b.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+        b.setBackgroundColor(getResources().getColor(R.color.color_time_date));
     }
 }

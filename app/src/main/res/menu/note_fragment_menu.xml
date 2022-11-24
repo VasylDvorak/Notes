@@ -5,20 +5,10 @@
         android:id= "@+id/send_note"
         android:title= "@string/Send_note"
         android:icon="@android:drawable/ic_menu_send"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id= "@+id/add_photo"
         android:title= "@string/Add_photo"
-        android:icon="@android:drawable/ic_menu_gallery"
-        app:showAsAction= "always" />
-    <item
-        android:id="@+id/change_theme"
-        android:title="@string/Change_theme"
-        android:icon="@android:drawable/ic_menu_view"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/exit_from_notes"
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:title="@string/Exit_from_notes"
-        app:showAsAction="always" />
+        android:icon="@android:drawable/ic_input_add"
+        app:showAsAction= "ifRoom" />
 </menu>

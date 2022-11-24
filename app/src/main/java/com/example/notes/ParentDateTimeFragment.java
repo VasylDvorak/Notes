@@ -3,8 +3,11 @@ package com.example.notes;
 
 import static com.example.notes.NoteFragment.PDateTime;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -54,6 +57,7 @@ public class ParentDateTimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         myFragment = inflater.inflate(R.layout.fragment_parent_date_time, container, false);
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
@@ -100,4 +104,21 @@ public class ParentDateTimeFragment extends Fragment {
                 requireActivity().getSupportFragmentManager().popBackStack();
             });
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
+
+        Fragment CurrentFragment = (Fragment) requireActivity().getSupportFragmentManager().findFragmentByTag("PARENT_FRAGMENT");
+
+        if((getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT)&&(menu != null )&&
+                ( CurrentFragment != null && CurrentFragment.isVisible())) {
+            menu.clear();
+        }
+    }
+
+
+
+
+
 }

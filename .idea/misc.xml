@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Notes/app/src/main/res/drawable/Round_crop.xml" value="0.122" />
+        <entry key="..\:/Notes/app/src/main/res/drawable/round_corp.xml" value="0.106" />
+        <entry key="..\:/Notes/app/src/main/res/layout-land/activity_main.xml" value="0.11458333333333333" />
+        <entry key="..\:/Notes/app/src/main/res/layout-land/fragment_note.xml" value="0.13541666666666666" />
         <entry key="..\:/Notes/app/src/main/res/layout/activity_main.xml" value="0.12158054711246201" />
+        <entry key="..\:/Notes/app/src/main/res/layout/drawer_header.xml" value="0.264" />
+        <entry key="..\:/Notes/app/src/main/res/layout/fragment_date_picker.xml" value="0.17391304347826086" />
+        <entry key="..\:/Notes/app/src/main/res/layout/fragment_note.xml" value="0.1015625" />
+        <entry key="..\:/Notes/app/src/main/res/layout/fragment_notes.xml" value="0.17391304347826086" />
+        <entry key="..\:/Notes/app/src/main/res/menu/context_menu.xml" value="0.24166666666666667" />
         <entry key="..\:/Notes/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/menu/menu_drawer.xml" value="0.21296296296296297" />
+        <entry key="..\:/Notes/app/src/main/res/menu/note_fragment_menu.xml" value="0.2037037037037037" />
+        <entry key="..\:/Notes/app/src/main/res/menu/popup_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

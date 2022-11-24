@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id= "@+id/action_about"
-        android:title= "@string/about"
-        app:showAsAction= "never" />
+        android:id= "@+id/action_sort"
+        android:title= "@string/Sort"
+        app:showAsAction="never" />
     <item
-        android:id= "@+id/action_exit"
-        android:icon= "@android:drawable/ic_menu_close_clear_cancel"
-        android:title= "@string/exit"
+        android:id= "@+id/action_search"
+        android:icon= "@android:drawable/ic_menu_search"
+        android:title= "@string/Search"
         app:showAsAction= "always" />
 
 </menu>

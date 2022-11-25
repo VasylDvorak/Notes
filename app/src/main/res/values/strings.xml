@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="btnBack">Назад</string>
-    <string name= "Search" >Search</string>
-    <string name= "Sort" >Sort</string>
-    <string name= "about_developers" >О разработчиках </string>
+    <string name="Search">Search</string>
+    <string name="Sort">Sort</string>
+    <string name="about_developers">О разработчиках </string>
     <string name="navigation_drawer_open">Открытие</string>
     <string name="navigation_drawer_close">Зактырие</string>
     <string name="header_title">Вася</string>
@@ -26,7 +26,6 @@
     <string name="titleChangeColor">Поменять цвет</string>
     <string name="titleChangeTextSize">Поменять размер шрифта</string>
     <string name="add_note">add</string>
-
 
     <style name="StyleText">
         <item name="android:layout_width">match_parent</item>

@@ -1,6 +1,5 @@
 package com.example.notes;
 
-
 import static com.example.notes.NotesFragment.SELECTED_NOTE;
 
 import android.os.Bundle;

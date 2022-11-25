@@ -1,7 +1,5 @@
 package com.example.notes;
 
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -32,8 +29,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class NotesFragment extends Fragment {
-
-
     static final String SELECTED_NOTE = "none";
     protected static int previous_position;
     private Note note;
@@ -66,7 +61,7 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        FloatingActionButton fl_button= view.findViewById(R.id.btnAdd);
+        FloatingActionButton fl_button = view.findViewById(R.id.btnAdd);
 
         registerForContextMenu(fl_button);
 
@@ -138,16 +133,15 @@ public class NotesFragment extends Fragment {
         }
     }
 
-
-    private void initPopupMenu(View rootView, TextView view, int index){
+    private void initPopupMenu(View rootView, TextView view, int index) {
         view.setOnLongClickListener(v -> {
             Activity activity = requireActivity();
-            PopupMenu popupMenu = new PopupMenu(activity,v );
+            PopupMenu popupMenu = new PopupMenu(activity, v);
             activity.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    switch (menuItem.getItemId()){
+                    switch (menuItem.getItemId()) {
                         case R.id.action_popup_delete:
                             createOneButtonAlertDialog("Реализовать Delete");
                             return true;
@@ -162,8 +156,6 @@ public class NotesFragment extends Fragment {
             return true;
         });
     }
-
-
 
     private void showNoteDetails(Note note) {
         this.note = note;
@@ -196,26 +188,18 @@ public class NotesFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-
-
-
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo)
-    {
+                                    ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        MenuInflater inflater= getActivity().getMenuInflater();
+        MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.context_menu, menu);
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
-
-        switch (item.getItemId())
-        {
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.add:
                 createOneButtonAlertDialog("Реализовать добавить");
                 break;
@@ -231,14 +215,9 @@ public class NotesFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
-
-            menu.clear();
-
-            inflater.inflate(R.menu.menu, menu);
-
+        menu.clear();
+        inflater.inflate(R.menu.menu, menu);
     }
-
-
 
     private void createOneButtonAlertDialog(String title_window) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -263,4 +242,4 @@ public class NotesFragment extends Fragment {
     }
 
 
-    }
+}

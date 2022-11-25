@@ -1,6 +1,5 @@
 package com.example.notes;
 
-
 import static com.example.notes.NoteFragment.PDateTime;
 
 import android.content.res.Configuration;
@@ -19,7 +18,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.notes.Adapter.SectionPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-
 
 public class ParentDateTimeFragment extends Fragment {
 
@@ -62,7 +60,6 @@ public class ParentDateTimeFragment extends Fragment {
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         return myFragment;
-
     }
 
     @Override
@@ -108,17 +105,16 @@ public class ParentDateTimeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 
-        Fragment CurrentFragment = (Fragment) requireActivity().getSupportFragmentManager().findFragmentByTag("PARENT_FRAGMENT");
+        Fragment CurrentFragment = requireActivity().getSupportFragmentManager().findFragmentByTag("PARENT_FRAGMENT");
 
-        if((getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_PORTRAIT)&&(menu != null )&&
-                ( CurrentFragment != null && CurrentFragment.isVisible())) {
+        if ((!isLandscape()) && (menu != null) &&
+                (CurrentFragment != null && CurrentFragment.isVisible())) {
             menu.clear();
         }
     }
 
-
-
-
-
+    private boolean isLandscape() {
+        return getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+    }
 }

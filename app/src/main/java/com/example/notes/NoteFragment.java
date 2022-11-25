@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -89,7 +87,7 @@ public class NoteFragment extends Fragment {
                         int k = 1;
                         rt = getActivity().findViewById(k);
                     }
-                    if (PDateTime == 0)
+                    if ((PDateTime == 0)&&(rt !=null)&&(note !=null))
                         rt.setText(note.getTitle());
                 }
 
@@ -133,39 +131,31 @@ public class NoteFragment extends Fragment {
     }
 
 
-
-    private void initDateTimePopupMenu(TextView view){
-            Activity activity = requireActivity();
-            PopupMenu popupMenu = new PopupMenu(activity,view );
-            activity.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+    private void initDateTimePopupMenu(TextView view) {
+        Activity activity = requireActivity();
+        PopupMenu popupMenu = new PopupMenu(activity, view);
+        activity.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         MenuItem item = popupMenu.getMenu().findItem(R.id.action_popup_delete);
-        if (item != null ) {
-            item.setVisible(false);}
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getItemId() == R.id.action_popup_correct){
-                        showCorrectDateTime(note);
-                    }
-                    return true;
+        if (item != null) {
+            item.setVisible(false);
+        }
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.action_popup_correct) {
+                    showCorrectDateTime(note);
                 }
-            });
-            popupMenu.show();
-
+                return true;
+            }
+        });
+        popupMenu.show();
     }
-
-
-
-
-
-
 
 
     private void showCorrectDateTime(Note note) {
 
         this.note = note;
-        if (getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE) {
+        if (isLandscape()) {
             showLandCorrectDateTime(note);
         } else {
             showPortCorrectDateTime(note);
@@ -194,34 +184,33 @@ public class NoteFragment extends Fragment {
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 
-        Fragment CurrentFragment = (Fragment) requireActivity().getSupportFragmentManager().findFragmentByTag("NOTE_FRAGMENT");
+        Fragment CurrentFragment = requireActivity().getSupportFragmentManager().findFragmentByTag("NOTE_FRAGMENT");
 
-                    if((getResources().getConfiguration().orientation
-                            == Configuration.ORIENTATION_PORTRAIT)&&(menu != null )&&
-                            ( CurrentFragment != null && CurrentFragment.isVisible())) {
-                        menu.clear();
-
-                        inflater.inflate(R.menu.note_fragment_menu, menu);
-                    }
+        if ((!isLandscape()) && (menu != null) &&
+                (CurrentFragment != null && CurrentFragment.isVisible())) {
+            menu.clear();
+            inflater.inflate(R.menu.note_fragment_menu, menu);
+        }
     }
 
     @Override
-    public boolean onOptionsItemSelected( @NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         switch (id) {
             case R.id.send_note:
                 // Сделать поиск
                 createOneButtonAlertDialog("Сделать отослать заметку");
-                return true ;
+                return true;
             case R.id.add_photo:
                 createOneButtonAlertDialog("Сделать добавить фото");
-                return true ;
+                return true;
         }
-        return super .onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -15,26 +15,33 @@
         android:scaleType="centerCrop"
         app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar" />
 
-    <TextView
-        android:id="@+id/header_title_id1"
+    <LinearLayout
+        android:id="@+id/correct_text_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Заметки: "
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="@dimen/title_text_size" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/header_title_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_time_date"
-        android:textSize="@dimen/title_text_size" />
+        <TextView
+            android:id="@+id/header_title_id1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Заметки: "
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="@dimen/title_text_size" />
 
-    <TextView
-        android:id="@+id/header_title_id2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="@dimen/title_text_size" />
+        <TextView
+            android:id="@+id/header_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_time_date"
+            android:textSize="@dimen/title_text_size" />
 
+        <TextView
+            android:id="@+id/header_title_id2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="@dimen/title_text_size" />
+
+    </LinearLayout>
 </LinearLayout>

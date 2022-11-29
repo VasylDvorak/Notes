@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width= "match_parent"
-        android:layout_height= "wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <androidx.appcompat.widget.Toolbar
-            android:id= "@+id/toolbar"
-            android:layout_width= "match_parent"
-            android:layout_height= "?attr/actionBarSize"
-            android:background= "@color/set_text_toast"
-            app:title= "@string/app_name"
-            app:subtitle= "@string/subtitle"
-            app:subtitleTextColor= "@color/teal_200"
-            app:titleTextColor= "@color/color_time_date" />
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/set_text_toast"
+            app:subtitle="@string/subtitle"
+            app:subtitleTextColor="@color/teal_200"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/color_time_date" />
     </com.google.android.material.appbar.AppBarLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-
-    <FrameLayout
-        android:id="@+id/notes_container"
-        android:layout_width="0px"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:orientation="horizontal">
 
-    <View
-        android:id="@+id/void_view"
-        android:layout_width="5mm"
-        android:layout_height="1sp" />
+        <FrameLayout
+            android:id="@+id/notes_container"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-    <FrameLayout
-        android:id="@+id/note_container"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1.5" />
+        <View
+            android:id="@+id/void_view"
+            android:layout_width="5mm"
+            android:layout_height="1sp" />
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/note_container"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5" />
+
+    </LinearLayout>
 </LinearLayout>
 
 

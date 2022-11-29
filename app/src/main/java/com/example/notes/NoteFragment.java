@@ -1,5 +1,7 @@
 package com.example.notes;
 
+import static com.example.notes.MainActivity.note_text_color;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -26,10 +28,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 public class NoteFragment extends Fragment {
-
+    //  private OnDialogListener ColorListener;
     static final String SELECTED_NOTE = "note";
     static int PDateTime;
+    //  public String mListener;
     boolean title_was_changed;
+    private int text_color;
     private Note note;
 
 
@@ -48,8 +52,10 @@ public class NoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState != null)
             requireActivity().getSupportFragmentManager().popBackStack();
+
     }
     //Call onActivity Create method
 
@@ -64,6 +70,7 @@ public class NoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle arguments = getArguments();
+
         TextView time_date_alarm = view.findViewById(R.id.time_date_alarm_view);
         TextView tvDescription = view.findViewById(R.id.tvDescription);
         title_was_changed = false;
@@ -73,6 +80,7 @@ public class NoteFragment extends Fragment {
                 note = Note.getNote(0);
             TextView tvTitle = view.findViewById(R.id.tvTitle);
             tvTitle.setText(note.getTitle());
+            tvTitle.setTextColor(getResources().getColor(note_text_color));
             tvTitle.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -87,7 +95,7 @@ public class NoteFragment extends Fragment {
                         int k = 1;
                         rt = getActivity().findViewById(k);
                     }
-                    if ((PDateTime == 0)&&(rt !=null)&&(note !=null))
+                    if ((PDateTime == 0) && (rt != null) && (note != null))
                         rt.setText(note.getTitle());
                 }
 
@@ -99,6 +107,7 @@ public class NoteFragment extends Fragment {
 
             time_date_alarm.setText(note.getTimeDateAlarm());
             tvDescription.setText(note.getDescription());
+            tvDescription.setTextColor(getResources().getColor(note_text_color));
             tvDescription.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -130,7 +139,6 @@ public class NoteFragment extends Fragment {
         }
     }
 
-
     private void initDateTimePopupMenu(TextView view) {
         Activity activity = requireActivity();
         PopupMenu popupMenu = new PopupMenu(activity, view);
@@ -150,7 +158,6 @@ public class NoteFragment extends Fragment {
         });
         popupMenu.show();
     }
-
 
     private void showCorrectDateTime(Note note) {
 
@@ -213,12 +220,10 @@ public class NoteFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
     private boolean isLandscape() {
         return getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
     }
-
 
     private void createOneButtonAlertDialog(String title_window) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

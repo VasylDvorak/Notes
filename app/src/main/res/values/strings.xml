@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name">Заметки</string>
     <string name="btnBack">Назад</string>
-    <string name="Search">Search</string>
-    <string name="Sort">Sort</string>
+    <string name="Search">Искать</string>
+    <string name="Sort">Сортировать</string>
     <string name="about_developers">О разработчиках </string>
     <string name="navigation_drawer_open">Открытие</string>
     <string name="navigation_drawer_close">Зактырие</string>
@@ -16,16 +16,34 @@
     <string name="Title">О программе</string>
     <string name="version">Программа создана Василием. Version v.2.1</string>
     <string name="ok">OK</string>
-    <string name="subtitle">Your notes</string>
-    <string name="Send_note">Send note</string>
-    <string name="Add_photo">Add photo</string>
-    <string name="setting">Settings</string>
-    <string name="delete_str">Delete</string>
-    <string name="correct_str">Correct</string>
+    <string name="subtitle">Ваши заметки</string>
+    <string name="Send_note">Отослать заметку</string>
+    <string name="Add_photo">Добавить фото</string>
+    <string name="setting">Настройки</string>
+    <string name="delete_str">Удалить заметку</string>
+    <string name="correct_str">Корректировть</string>
 
     <string name="titleChangeColor">Поменять цвет</string>
     <string name="titleChangeTextSize">Поменять размер шрифта</string>
     <string name="add_note">add</string>
+    <string name="correction_message">Скорректируйте название заметки</string>
+    <string name="name_of_user">Имя пользлвателя</string>
+    <string name="profession">Род деятельности</string>
+    <string name="apply">Применить</string>
+    <string name="exit_question">Вы уврены,что хотите закрыть программу ?</string>
+    <string name="Notes_were_closed">Приложенине блокнот закрыто.</string>
+    <string name="Notes_program">Программа блокнот</string>
+    <string name="exit_alert_dialog">ВЫХОД</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="Exit_from_notes">Выход</string>
+    <string name="Current_time_date">Текущее время и дата</string>
+    <string name="Current_date_time">Текущее время и дата</string>
+    <string name="choose_theme_of_application">ВЫБЕРИТЕ ТЕМУ ПРИЛОЖЕНИЯ</string>
+    <string name="add">Добавить</string>
+    <string name="Change_theme">Поменять тему</string>
+    <string name="cancel">Отмена</string>
+    <string name="correct_name">Поменяйте...</string>
 
     <style name="StyleText">
         <item name="android:layout_width">match_parent</item>

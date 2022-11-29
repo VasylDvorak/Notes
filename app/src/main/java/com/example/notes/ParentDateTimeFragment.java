@@ -21,7 +21,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class ParentDateTimeFragment extends Fragment {
 
-
     static final String SELECTED_NOTE = "note";
     View myFragment;
     ViewPager viewPager;
@@ -29,7 +28,6 @@ public class ParentDateTimeFragment extends Fragment {
     private DatePickerFragment datePickerFragment;
     private TimePickerFragment timePickerFragment;
     private Note note;
-
 
     public ParentDateTimeFragment() {
         // Required empty public constructor
@@ -110,6 +108,7 @@ public class ParentDateTimeFragment extends Fragment {
         if ((!isLandscape()) && (menu != null) &&
                 (CurrentFragment != null && CurrentFragment.isVisible())) {
             menu.clear();
+            inflater.inflate(R.menu.parent_data_time_menu, menu);
         }
     }
 

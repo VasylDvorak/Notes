@@ -1,5 +1,7 @@
 package com.example.notes;
 
+import static com.example.notes.MainActivity.notes_text_color;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,9 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +36,8 @@ public class NotesFragment extends Fragment {
     static final String SELECTED_NOTE = "none";
     protected static int previous_position;
     private Note note;
+    private Toast correctToast;
+    private int text_color;
 
     public NotesFragment() {
     }
@@ -39,8 +45,6 @@ public class NotesFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelable(SELECTED_NOTE, note);
-
-
         super.onSaveInstanceState(outState);
     }
 
@@ -59,6 +63,7 @@ public class NotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        correctToast = prepareCustomToast(view);
 
 
         FloatingActionButton fl_button = view.findViewById(R.id.btnAdd);
@@ -67,6 +72,7 @@ public class NotesFragment extends Fragment {
 
         if (savedInstanceState != null) {
             note = savedInstanceState.getParcelable(SELECTED_NOTE);
+
         }
 
         initNotes(view.findViewById(R.id.data_container));
@@ -80,7 +86,6 @@ public class NotesFragment extends Fragment {
             createOneButtonAlertDialog("О приложении");
         });
     }
-
 
     private boolean isLandscape() {
         return getResources().getConfiguration().orientation
@@ -105,8 +110,8 @@ public class NotesFragment extends Fragment {
             else
                 tv.setBackgroundResource(R.color.white);
             tv.setId(i + 1);
+            tv.setTextColor(getResources().getColor(notes_text_color));
             layoutView.addView(tv);
-
             final int index = i;
             initPopupMenu(view, tv, index);
             tv.setOnClickListener(v -> {
@@ -145,9 +150,11 @@ public class NotesFragment extends Fragment {
                         case R.id.action_popup_delete:
                             createOneButtonAlertDialog("Реализовать Delete");
                             return true;
-                        case R.id.action_popup_correct:
+                        case R.id.action_popup_correct: {
                             createOneButtonAlertDialog("Сделать коррекция");
-                            return true;
+                            correctToast.show();
+                        }
+                        return true;
                     }
                     return true;
                 }
@@ -179,6 +186,7 @@ public class NotesFragment extends Fragment {
     }
 
     private void showLandNoteDetails(Note note) {
+
         NoteFragment noteFragment = NoteFragment.newInstance(note);
         FragmentManager fragmentManager =
                 requireActivity().getSupportFragmentManager();
@@ -209,7 +217,6 @@ public class NotesFragment extends Fragment {
             default:
                 return super.onContextItemSelected(item);
         }
-
         return true;
     }
 
@@ -241,5 +248,21 @@ public class NotesFragment extends Fragment {
         b.setBackgroundColor(getResources().getColor(R.color.color_time_date));
     }
 
+    private Toast prepareCustomToast(View view) {
+        LayoutInflater inflator = getLayoutInflater();
+        View layout = inflator.inflate(R.layout.my_toast_layout,
+                view.findViewById(R.id.toast_layout_root));
 
+        ImageView image1 = layout.findViewById(R.id.image1);
+        image1.setImageResource(R.drawable.ic_baseline_brush_24);
+
+        TextView textView = layout.findViewById(R.id.text);
+        textView.setText(R.string.correction_message);
+
+        Toast toast = new Toast(getContext());
+        // toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        return toast;
+    }
 }

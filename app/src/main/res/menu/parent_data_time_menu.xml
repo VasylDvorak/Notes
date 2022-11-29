@@ -2,19 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id= "@+id/send_note"
-        android:title= "@string/Send_note"
-        android:icon="@android:drawable/ic_menu_send"
+        android:id="@+id/show_current_data_time"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/Current_time_date"
         app:showAsAction="always" />
     <item
-        android:id= "@+id/add_photo"
-        android:title= "@string/Add_photo"
-        android:icon="@android:drawable/ic_menu_gallery"
-        app:showAsAction= "always" />
-    <item
         android:id="@+id/change_theme"
-        android:title="@string/Change_theme"
         android:icon="@android:drawable/ic_menu_view"
+        android:title="@string/Change_theme"
         app:showAsAction="always" />
     <item
         android:id="@+id/exit_from_notes"

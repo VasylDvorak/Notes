@@ -3,6 +3,7 @@ package com.example.notes;
 
 import static com.example.notes.NotesFragment.SELECTED_NOTE;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,10 @@ public class DatePickerFragment extends Fragment {
         if (arguments != null) {
             Note note = arguments.getParcelable(SELECTED_NOTE);
             DatePicker datePicker = view.findViewById(R.id.datePicker);
+            if (!isLandscape()) {
+                datePicker.setSpinnersShown(false);
+                datePicker.setCalendarViewShown(true);
+            }
             datePicker.init(note.date[2], note.date[1] - 1, note.date[0], new DatePicker.OnDateChangedListener() {
 
                 @Override
@@ -53,5 +58,10 @@ public class DatePickerFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private boolean isLandscape() {
+        return getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
     }
 }

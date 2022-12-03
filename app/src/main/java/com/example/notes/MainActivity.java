@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int first_stile = 0;
     private static final int second_stile = 1;
     private static final int third_style = 2;
-    protected static int note_text_color, notes_text_color;
+    protected static int note_text_color, notes_text_color, notes_text_color_first;
     private TextView headerTitleName, headerTitleProfession;
     private String UserName, UserProfession;
     private Snackbar snackbar;
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private int chosen, previous_chosen;
     private LayoutInflater inflator;
     private View layout;
+    private int first;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             previous_chosen = savedInstanceState.getInt(CHOSEN_THEME);
             setAppTheme(previous_chosen);
         } else {
-
+            first = 1;
             setAppTheme(first_stile);
             getSupportFragmentManager()
                     .beginTransaction()
@@ -213,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDialogName() {
                 UserName = CorrectText(headerTitleName);
-
             }
 
             @Override
@@ -414,19 +415,9 @@ public class MainActivity extends AppCompatActivity {
         changed_toolbar.setSubtitleTextColor(getResources().getColor(text_subtitle_color_tool_bar));
         inflator = getLayoutInflater();
         layout = inflator.inflate(R.layout.fragment_notes,
-                findViewById(R.id.data_container));
+                findViewById(R.id.notes_container));
         TextView changed_color_text;
-        boolean b = true;
-        int count = 1;
-        do {
-            changed_color_text = layout.findViewById(count);
-            if (changed_color_text != null) {
-                changed_color_text.setTextColor(getResources().getColor(text_notes_list_color));
-                count++;
-            } else
-                b = false;
-        } while (b);
-        notes_text_color = text_notes_list_color;
+        notes_text_color = getResources().getColor(text_notes_list_color);
         inflator = getLayoutInflater();
         layout = inflator.inflate(R.layout.fragment_note,
                 findViewById(R.id.linear_layout_note));
@@ -435,9 +426,18 @@ public class MainActivity extends AppCompatActivity {
         changed_color_text.setTextColor(getResources().getColor(text_notes_list_color));
         changed_color_text = layout.findViewById(R.id.tvDescription);
         changed_color_text.setTextColor(getResources().getColor(text_notes_list_color));
+
+        if (first != 0) {
+            MainActivity.this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.data_container, ListFragmentV2.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     private void setAppTheme(int codeStyle) {
+        notes_text_color_first = getResources().getColor(R.color.teal_200);
         switch (codeStyle) {
             case first_stile:
                 ChangeStyleTheme(R.color.set_text_toast,

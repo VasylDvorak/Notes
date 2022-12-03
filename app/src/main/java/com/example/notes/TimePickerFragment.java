@@ -1,6 +1,6 @@
 package com.example.notes;
 
-import static com.example.notes.NotesFragment.SELECTED_NOTE;
+import static com.example.notes.NoteFragment.SELECTED_NOTE;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

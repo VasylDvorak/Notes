@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private LayoutInflater inflator;
     private View layout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

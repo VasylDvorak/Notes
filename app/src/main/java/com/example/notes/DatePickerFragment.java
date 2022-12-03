@@ -1,7 +1,6 @@
 package com.example.notes;
 
-
-import static com.example.notes.NotesFragment.SELECTED_NOTE;
+import static com.example.notes.ParentDateTimeFragment.SELECTED_NOTE;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

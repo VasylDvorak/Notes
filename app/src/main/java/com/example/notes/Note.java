@@ -25,7 +25,7 @@ public class Note implements Parcelable {
     private static int counter;
 
     static {
-        notes = new Note[30];
+        notes = new Note[7];
         for (int i = 0; i < notes.length; i++) {
             notes[i] = Note.getNote(i);
         }
@@ -41,7 +41,6 @@ public class Note implements Parcelable {
     {
         id = ++counter;
     }
-
 
     public Note(String title, String description, LocalDateTime creationDate, int[] date, int[] time) {
         this.title = title;

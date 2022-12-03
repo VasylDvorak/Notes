@@ -14,15 +14,10 @@
         android:fillViewport="true"
         android:scrollbars="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/data_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:orientation="vertical"></LinearLayout>
+            android:layout_height="match_parent" />
     </ScrollView>
 
     <LinearLayout

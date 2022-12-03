@@ -33,6 +33,7 @@ public class NotesFragment extends Fragment {
     private Toast correctToast;
     private int text_color;
 
+
     public NotesFragment() {
 
     }

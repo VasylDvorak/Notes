@@ -1,5 +1,8 @@
 package com.example.notes;
 
+import static com.example.notes.MainActivity.notes_text_color;
+import static com.example.notes.MainActivity.notes_text_color_first;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +48,7 @@ public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView title;
-       // private final TextView description;
+        // private final TextView description;
         private final AppCompatImageView image;
         private final CheckBox like;
 
@@ -53,7 +56,7 @@ public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
-           // description = itemView.findViewById(R.id.description);
+            // description = itemView.findViewById(R.id.description);
             image = itemView.findViewById(R.id.imageView);
             like = itemView.findViewById(R.id.like);
 
@@ -70,13 +73,16 @@ public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder
         public void setData(CardData cardData) {
             title.setText(cardData.getTitle());
             title.setId(cardData.getId());
-        //    description.setText(cardData.getDescription());
+            if (notes_text_color == 0) notes_text_color = notes_text_color_first;
+            title.setTextColor(notes_text_color);
+            //    description.setText(cardData.getDescription());
             like.setChecked(cardData.isLike());
             image.setImageResource(cardData.getPicture());
 
         }
 
     }
+
 
 }
 

@@ -15,7 +15,6 @@ public class DialogHeaderDrawerFragment extends DialogFragment {
         return new DialogHeaderDrawerFragment();
     }
 
-    // Установим слушатель диалога
     public void setOnDialogListener(OnDialogListener dialogListener) {
         this.dialogListener = dialogListener;
     }

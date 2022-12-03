@@ -128,11 +128,14 @@ public class NoteFragment extends Fragment {
                 return true;
             });
             Button buttonBack = view.findViewById(R.id.btnBack);
+
+
             if (buttonBack != null)
                 buttonBack.setOnClickListener(view1 -> {
                     if (title_was_changed) {
                         TextView rt = getActivity().findViewById(note.getId());
                         rt.setText(note.getTitle());
+
                     }
                     requireActivity().getSupportFragmentManager().popBackStack();
                 });

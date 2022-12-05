@@ -23,8 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 
 public class NoteFragment extends Fragment {
@@ -90,7 +88,7 @@ public class NoteFragment extends Fragment {
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     note.setTitle(charSequence.toString());
                     title_was_changed = true;
-                    TextView rt = getActivity().findViewById(note.getId());
+                    TextView rt = getActivity().findViewById(note.getId(note));
                     if (rt == null) {
                         int k = 1;
                         rt = getActivity().findViewById(k);
@@ -133,7 +131,7 @@ public class NoteFragment extends Fragment {
             if (buttonBack != null)
                 buttonBack.setOnClickListener(view1 -> {
                     if (title_was_changed) {
-                        TextView rt = getActivity().findViewById(note.getId());
+                        TextView rt = getActivity().findViewById(note.getId(note));
                         rt.setText(note.getTitle());
 
                     }
@@ -153,46 +151,18 @@ public class NoteFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+                // Слушатель диалога , сюда попадает управление
+
                 if (menuItem.getItemId() == R.id.action_popup_correct) {
-                    showCorrectDateTime(note);
+                    ParentDateTimeFragment dialogDateTimeFragment =
+                            ParentDateTimeFragment.newInstance(note);
+                    dialogDateTimeFragment.show(requireActivity().getSupportFragmentManager(),
+                            "dialog_time_date_fragment");
                 }
                 return true;
             }
         });
         popupMenu.show();
-    }
-
-    private void showCorrectDateTime(Note note) {
-
-        this.note = note;
-        if (isLandscape()) {
-            showLandCorrectDateTime(note);
-        } else {
-            showPortCorrectDateTime(note);
-        }
-    }
-
-    private void showPortCorrectDateTime(Note note) {
-        ParentDateTimeFragment parentDateTimeFragment = ParentDateTimeFragment.newInstance(note);
-        FragmentManager fragmentManager =
-                requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction =
-                fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.notes_container, parentDateTimeFragment, "PARENT_FRAGMENT");
-        fragmentTransaction.addToBackStack("");
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
-    }
-
-    private void showLandCorrectDateTime(Note note) {
-        ParentDateTimeFragment parentDateTimeFragment = ParentDateTimeFragment.newInstance(note);
-        FragmentManager fragmentManager =
-                requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.note_container, parentDateTimeFragment); // замена  фрагмента
-        fragmentTransaction.addToBackStack("");
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
     }
 
     @Override

@@ -13,13 +13,15 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.notes.Adapter.SectionPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-public class ParentDateTimeFragment extends Fragment {
+public class ParentDateTimeFragment extends DialogFragment {
+
 
     static final String SELECTED_NOTE = "note";
     View myFragment;
@@ -32,6 +34,7 @@ public class ParentDateTimeFragment extends Fragment {
     public ParentDateTimeFragment() {
         // Required empty public constructor
     }
+
 
     public static ParentDateTimeFragment newInstance(Note note) {
         ParentDateTimeFragment fragment = new ParentDateTimeFragment();
@@ -96,7 +99,7 @@ public class ParentDateTimeFragment extends Fragment {
         if (Parent_button_back != null)
             Parent_button_back.setOnClickListener(view1 -> {
                 PDateTime = 0;
-                requireActivity().getSupportFragmentManager().popBackStack();
+                dismiss();
             });
     }
 

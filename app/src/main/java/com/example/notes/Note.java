@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class Note implements Parcelable {
@@ -20,46 +22,47 @@ public class Note implements Parcelable {
             return new Note[i];
         }
     };
-    private static final Random random = new Random();
-    private static final Note[] notes;
+    protected static final Random random = new Random();
+    public static int LENGTH_BEGIN = 7;
+    private static ArrayList<Note> notes;
     private static int counter;
 
     static {
-        notes = new Note[7];
-        for (int i = 0; i < notes.length; i++) {
-            notes[i] = Note.getNote(i);
+        notes = new ArrayList<Note>();
+        for (int i = 0; i < LENGTH_BEGIN; i++) {
+            notes.add(Note.getNote(i));
         }
     }
 
     int[] date;
     int[] time;
-    private int id;
-    private String title;
-    private String description;
-    private LocalDateTime creationDate;
+    //  private int id;
+    String title;
+    String description;
+    String creationDate;
+    int picture_id;
 
-    {
-        id = ++counter;
-    }
-
-    public Note(String title, String description, LocalDateTime creationDate, int[] date, int[] time) {
+    public Note(String title, String description, String creationDate, int[] date, int[] time, int picture_id) {
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.date = date;
         this.time = time;
+        this.picture_id = picture_id;
+
 
     }
 
     protected Note(Parcel parcel) {
-        id = parcel.readInt();
         title = parcel.readString();
         description = parcel.readString();
+        creationDate = parcel.readString();
         date = parcel.createIntArray();
         time = parcel.createIntArray();
+        picture_id = parcel.readInt();
     }
 
-    public static Note[] getNotes() {
+    public static ArrayList<Note> getNotes() {
         return notes;
     }
 
@@ -68,17 +71,22 @@ public class Note implements Parcelable {
     public static Note getNote(int index) {
         String title = String.format("Заметка %d", index);
         String description = String.format("Описание заметки %d", index);
-        LocalDateTime creationDate = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            creationDate = LocalDateTime.now().plusDays(-random.nextInt(5));
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
+// on below line we are creating a variable
+// for current date and time and calling a simple date format in it.
+
+        String currentDateAndTime = sdf.format(new Date());
         int[] date = new int[]{random.nextInt(31) + 1, random.nextInt(11) + 1, 2023 + random.nextInt(2)};
         int[] time = new int[]{random.nextInt(24) + 1, random.nextInt(60) + 1};
-        return new Note(title, description, creationDate, date, time);
+        return new Note(title, description, currentDateAndTime, date, time, 0);
     }
 
-    public int getId() {
-        return id;
+    public static void clearAll() {
+        notes = new ArrayList<Note>();
+    }
+
+    public int getId(Note note) {
+        return notes.indexOf(note);
     }
 
     public String getTitle() {
@@ -97,6 +105,22 @@ public class Note implements Parcelable {
         this.description = description;
     }
 
+    public int[] getDate() {
+        return date;
+    }
+
+    public void setDate(int[] date) {
+        this.date = date;
+    }
+
+    public int[] getTime() {
+        return time;
+    }
+
+    public void setTime(int[] time) {
+        this.time = time;
+    }
+
     public String getTimeDateAlarm() {
         String date_show, time_show, result_time_date_show, add_zero;
         add_zero = time[1] < 10 ? "0" : "";
@@ -106,12 +130,20 @@ public class Note implements Parcelable {
         return result_time_date_show;
     }
 
-    public LocalDateTime getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public int getPictureID() {
+        return picture_id;
+    }
+
+    public void setPictureID(int picture_id) {
+        this.picture_id = picture_id;
     }
 
     @Override
@@ -121,9 +153,12 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(getId());
         parcel.writeString(getTitle());
         parcel.writeString(getDescription());
+        parcel.writeString(getCreationDate());
+        parcel.writeIntArray(getDate());
+        parcel.writeIntArray(getTime());
+        parcel.writeInt(getPictureID());
     }
 
 

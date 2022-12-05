@@ -11,16 +11,29 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder> {
 
     CardsSource dateSource;
     private OnItemClickListener itemClickListener;
+    private final Fragment fragment;
+    private int menuPosition;
 
-    public ListAdapterV2(CardsSource dateSource) {
-
+    public ListAdapterV2(CardsSource dateSource, Fragment fragment) {
         this.dateSource = dateSource;
+        this.fragment = fragment;
+    }
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
+
+    private void registerContextMenu(View itemView) {
+        if (fragment != null) {
+            fragment.registerForContextMenu(itemView);
+        }
     }
 
     public void setItemClickListener(OnItemClickListener itemClickListener) {
@@ -54,18 +67,27 @@ public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             title = itemView.findViewById(R.id.title);
             // description = itemView.findViewById(R.id.description);
             image = itemView.findViewById(R.id.imageView);
             like = itemView.findViewById(R.id.like);
-
+            registerContextMenu(itemView);
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     int position = getAdapterPosition();
                     if (itemClickListener != null)
                         itemClickListener.onItemClick(view, position);
+                }
+            });
+            image.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    menuPosition = getLayoutPosition();
+                    itemView.showContextMenu(15, 15);
+
+                    return true;
                 }
             });
         }
@@ -80,9 +102,7 @@ public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder
             image.setImageResource(cardData.getPicture());
 
         }
-
     }
-
 
 }
 

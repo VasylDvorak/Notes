@@ -5,11 +5,24 @@
       <map>
         <entry key="..\:/Notes/app/src/main/res/drawable/ic_baseline_brush_24.xml" value="0.1" />
         <entry key="..\:/Notes/app/src/main/res/drawable/seporatpor.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/layout-land/activity_main.xml" value="0.1015625" />
         <entry key="..\:/Notes/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/layout/alert_dialog_correct_title.xml" value="0.11639492753623189" />
+        <entry key="..\:/Notes/app/src/main/res/layout/alert_dialog_custom_view.xml" value="0.15715579710144928" />
+        <entry key="..\:/Notes/app/src/main/res/layout/fragment_drawer_header_text_dialog.xml" value="0.12158054711246201" />
         <entry key="..\:/Notes/app/src/main/res/layout/fragment_list.xml" value="0.1109375" />
         <entry key="..\:/Notes/app/src/main/res/layout/fragment_list_v2.xml" value="0.234375" />
+        <entry key="..\:/Notes/app/src/main/res/layout/fragment_note.xml" value="0.1793478260869565" />
         <entry key="..\:/Notes/app/src/main/res/layout/fragment_notes.xml" value="0.10555555555555556" />
+        <entry key="..\:/Notes/app/src/main/res/layout/fragment_parent_date_time.xml" value="0.12158054711246201" />
         <entry key="..\:/Notes/app/src/main/res/layout/item_v2.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/layout/my_snackbar_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Notes/app/src/main/res/layout/my_toast_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Notes/app/src/main/res/layout/theme_chooser.xml" value="0.12158054711246201" />
+        <entry key="..\:/Notes/app/src/main/res/menu/card_menu.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/menu/cards_menu.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/Notes/app/src/main/res/menu/menu_drawer.xml" value="0.1" />
       </map>
     </option>
   </component>

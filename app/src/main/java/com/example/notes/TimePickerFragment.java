@@ -6,13 +6,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 public class TimePickerFragment extends Fragment {
+    private View layout;
+    private LayoutInflater inflator;
 
     public TimePickerFragment() {
         // Required empty public constructor
@@ -49,6 +54,15 @@ public class TimePickerFragment extends Fragment {
                 public void onTimeChanged(TimePicker view_time, int hourOfDay, int minute) {
                     note.time[0] = hourOfDay;
                     note.time[1] = minute;
+                    ArrayList<Note> notesd = Note.getNotes();
+                    int indexd = notesd.indexOf(note);
+                    Note.getNotes().set(indexd, note);
+                    inflator = getLayoutInflater();
+                    layout = inflator.inflate(R.layout.fragment_note,
+                            getActivity().findViewById(R.id.linear_layout_note));
+                    TextView time_date_alarm = layout.findViewById(R.id.time_date_alarm_view);
+                    time_date_alarm.setText(note.getTimeDateAlarm());
+
                 }
             });
         }

@@ -13,4 +13,5 @@
     <dimen name="textDescription">20sp</dimen>
     <dimen name="textTitle">42sp</dimen>
     <dimen name="heightImage">200dp</dimen>
+    <dimen name="date_picker_size">320dp</dimen>
 </resources>

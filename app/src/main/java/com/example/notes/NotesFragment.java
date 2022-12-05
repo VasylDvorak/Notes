@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,9 +29,6 @@ public class NotesFragment extends Fragment {
     public static int index;
     protected static int previous_position;
     private Note note;
-    private Toast correctToast;
-    private int text_color;
-
 
     public NotesFragment() {
 
@@ -61,23 +57,14 @@ public class NotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //   correctToast = prepareCustomToast(view);
-
-
-        FloatingActionButton fl_button = view.findViewById(R.id.btnAdd);
-
-        registerForContextMenu(fl_button);
-
         if (savedInstanceState != null) {
             note = savedInstanceState.getParcelable(SELECTED_NOTE);
         }
 
         initNotes(view.findViewById(R.id.data_container));
 
-
-        if (isLandscape()) {
-            showLandNoteDetails(Note.getNotes()[index]);
-        }
+        if (isLandscape() && (Note.getNotes().size() != 0))
+            showLandNoteDetails(Note.getNotes().get(index));
 
         FloatingActionButton btnOne = view.findViewById(R.id.about);
         btnOne.setOnClickListener(v -> {

@@ -52,10 +52,12 @@ public class DatePickerFragment extends Fragment {
                 datePicker.setSpinnersShown(false);
                 datePicker.setCalendarViewShown(true);
             }
-            datePicker.init(note.date[2], note.date[1] - 1, note.date[0], new DatePicker.OnDateChangedListener() {
+            datePicker.init(note.date[2], note.date[1] - 1, note.date[0],
+                    new DatePicker.OnDateChangedListener() {
 
                 @Override
-                public void onDateChanged(DatePicker view_date, int year, int monthOfYear, int dayOfMonth) {
+                public void onDateChanged(DatePicker view_date, int year,
+                                          int monthOfYear, int dayOfMonth) {
                     note.date[0] = view_date.getDayOfMonth();
                     note.date[1] = view_date.getMonth() + 1;
                     note.date[2] = view_date.getYear();

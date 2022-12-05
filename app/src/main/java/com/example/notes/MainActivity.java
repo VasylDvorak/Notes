@@ -246,7 +246,8 @@ public class MainActivity extends AppCompatActivity {
                 .setAction(R.string.apply, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        InputMethodManager imm = (InputMethodManager)
+                                getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         snackbar.dismiss();
                     }
@@ -271,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 text_view.setText(charSequence.toString());
+
             }
 
             @Override
@@ -294,7 +296,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAlertDialogWithCustomView() {
-        final View customView = getLayoutInflater().inflate(R.layout.alert_dialog_custom_view, null);
+        final View customView = getLayoutInflater()
+                .inflate(R.layout.alert_dialog_custom_view, null);
 
         TextView title = new TextView(this);
 // You Can Customise your Title here
@@ -311,7 +314,8 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this, getString(R.string.Notes_were_closed), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,
+                                getString(R.string.Notes_were_closed), Toast.LENGTH_LONG).show();
                         finishAndRemoveTask();
                     }
                 })
@@ -333,12 +337,14 @@ public class MainActivity extends AppCompatActivity {
 
         // on below line we are creating and initializing
 // variable for simple date format.
-        SimpleDateFormat sdf = new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
+        SimpleDateFormat sdf =
+                new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
 // on below line we are creating a variable
 // for current date and time and calling a simple date format in it.
         String currentDateAndTime = sdf.format(new Date());
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this, CHANNEL_ID);
 // Все цветные иконки отображаются только в оттенках серого
         builder.setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(getString(R.string.Current_date_time))
@@ -370,17 +376,20 @@ public class MainActivity extends AppCompatActivity {
 // В билдере указываем заголовок окна . Можно указывать как ресурс ,
 // так и строку
         inflator = getLayoutInflater();
-        layout = inflator.inflate(R.layout.theme_chooser, findViewById(R.id.root_title_theme_chooser));
+        layout = inflator.inflate(R.layout.theme_chooser,
+                findViewById(R.id.root_title_theme_chooser));
         builder.setCustomTitle(layout)
 // Добавляем список элементов ; chosen -- выбранный элемент ,
-                .setSingleChoiceItems(items, previous_chosen, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(items, previous_chosen,
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int item) {
                         chosen = item; // Обновляем выбранный элемент
                         setAppTheme(chosen);
                     }
                 })
-                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.cancel),
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         chosen = previous_chosen;
@@ -388,7 +397,8 @@ public class MainActivity extends AppCompatActivity {
                         alert.dismiss();
                     }
                 })
-                .setPositiveButton(getString(R.string.apply), new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.apply),
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         previous_chosen = chosen;

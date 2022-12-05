@@ -42,7 +42,8 @@ public class Note implements Parcelable {
     String creationDate;
     int picture_id;
 
-    public Note(String title, String description, String creationDate, int[] date, int[] time, int picture_id) {
+    public Note(String title, String description, String creationDate,
+                int[] date, int[] time, int picture_id) {
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
@@ -71,12 +72,14 @@ public class Note implements Parcelable {
     public static Note getNote(int index) {
         String title = String.format("Заметка %d", index);
         String description = String.format("Описание заметки %d", index);
-        SimpleDateFormat sdf = new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
+        SimpleDateFormat sdf =
+                new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
 // on below line we are creating a variable
 // for current date and time and calling a simple date format in it.
 
         String currentDateAndTime = sdf.format(new Date());
-        int[] date = new int[]{random.nextInt(31) + 1, random.nextInt(11) + 1, 2023 + random.nextInt(2)};
+        int[] date = new int[]{random.nextInt(31) + 1,
+                random.nextInt(11) + 1, 2023 + random.nextInt(2)};
         int[] time = new int[]{random.nextInt(24) + 1, random.nextInt(60) + 1};
         return new Note(title, description, currentDateAndTime, date, time, 0);
     }

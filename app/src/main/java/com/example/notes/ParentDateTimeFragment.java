@@ -57,7 +57,8 @@ public class ParentDateTimeFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        myFragment = inflater.inflate(R.layout.fragment_parent_date_time, container, false);
+        myFragment = inflater.inflate(R.layout.fragment_parent_date_time,
+                container, false);
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         return myFragment;
@@ -106,7 +107,8 @@ public class ParentDateTimeFragment extends DialogFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 
-        Fragment CurrentFragment = requireActivity().getSupportFragmentManager().findFragmentByTag("PARENT_FRAGMENT");
+        Fragment CurrentFragment = requireActivity().getSupportFragmentManager()
+                .findFragmentByTag("PARENT_FRAGMENT");
 
         if ((!isLandscape()) && (menu != null) &&
                 (CurrentFragment != null && CurrentFragment.isVisible())) {

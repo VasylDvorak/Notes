@@ -24,7 +24,8 @@ public class DialogHeaderDrawerFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_drawer_header_text_dialog, container, false);
+        View view = inflater.inflate(R.layout.fragment_drawer_header_text_dialog,
+                container, false);
 // Запретим пользователю выходить без выбора
         setCancelable(false);
         view.findViewById(R.id.btn_name).setOnClickListener(new View.OnClickListener() {

@@ -133,14 +133,17 @@ public class NotesFragment extends Fragment {
                     }
                 });
         Dialog d = builder.show();
-        int textViewId = d.getContext().getResources().getIdentifier("android:id/alertTitle", null, null);
+        int textViewId = d.getContext().getResources()
+                .getIdentifier("android:id/alertTitle", null, null);
         TextView tv = d.findViewById(textViewId);
         tv.setTextColor(getResources().getColor(R.color.set_text_toast));
         tv.setBackgroundColor(getResources().getColor(R.color.teal_200));
-        textViewId = d.getContext().getResources().getIdentifier("android:id/message", null, null);
+        textViewId = d.getContext().getResources()
+                .getIdentifier("android:id/message", null, null);
         tv = d.findViewById(textViewId);
         tv.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-        textViewId = d.getContext().getResources().getIdentifier("android:id/button1", null, null);
+        textViewId = d.getContext().getResources()
+                .getIdentifier("android:id/button1", null, null);
         Button b = d.findViewById(textViewId);
         b.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
         b.setBackgroundColor(getResources().getColor(R.color.color_time_date));

@@ -40,10 +40,15 @@
     <string name="Current_time_date">Текущее время и дата</string>
     <string name="Current_date_time">Текущее время и дата</string>
     <string name="choose_theme_of_application">ВЫБЕРИТЕ ТЕМУ ПРИЛОЖЕНИЯ</string>
-    <string name="add">Добавить</string>
+    <string name="add2">Добавить2</string>
     <string name="Change_theme">Поменять тему</string>
     <string name="cancel">Отмена</string>
     <string name="correct_name">Поменяйте...</string>
+    <string name="clear">Очистить</string>
+    <string name="add">Добавить</string>
+    <string name="update">Изменить</string>
+    <string name="delete">Удалить</string>
+    <string name="correct_title">Скорректируйте заголовок</string>
 
     <style name="StyleText">
         <item name="android:layout_width">match_parent</item>

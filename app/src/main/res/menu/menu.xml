@@ -10,10 +10,7 @@
         android:id="@+id/action_sort"
         android:title="@string/Sort"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/add_note"
-        android:title="@string/add"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/change_theme"
         android:title="@string/Change_theme"

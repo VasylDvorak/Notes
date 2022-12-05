@@ -8,13 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 
 public class DatePickerFragment extends Fragment {
+    private View layout;
+    private LayoutInflater inflator;
 
     public DatePickerFragment() {
         // Required empty public constructor
@@ -39,7 +44,7 @@ public class DatePickerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle arguments = getArguments();
-        System.out.println(arguments + "date");
+        // System.out.println(arguments + "date");
         if (arguments != null) {
             Note note = arguments.getParcelable(SELECTED_NOTE);
             DatePicker datePicker = view.findViewById(R.id.datePicker);
@@ -54,10 +59,22 @@ public class DatePickerFragment extends Fragment {
                     note.date[0] = view_date.getDayOfMonth();
                     note.date[1] = view_date.getMonth() + 1;
                     note.date[2] = view_date.getYear();
+                    ArrayList<Note> notesd = Note.getNotes();
+                    int indexd = notesd.indexOf(note);
+                    Note.getNotes().set(indexd, note);
+
+                    inflator = getLayoutInflater();
+                    layout = inflator.inflate(R.layout.fragment_note,
+                            getActivity().findViewById(R.id.linear_layout_note));
+                    TextView time_date_alarm = layout.findViewById(R.id.time_date_alarm_view);
+                    time_date_alarm.setText(note.getTimeDateAlarm());
                 }
             });
+
+
         }
     }
+
 
     private boolean isLandscape() {
         return getResources().getConfiguration().orientation

@@ -107,9 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 createOneButtonAlertDialog("Сделать сортировку");
                 return true;
 
-            case R.id.add_note:
-                createOneButtonAlertDialog("Сделать добавить заметку");
-                return true;
             case 6:
                 createOneButtonAlertDialog("Сделать переслать заметку");
                 return true;
@@ -326,7 +323,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
 
     private void showNotification() {
 // Создаем NotificationChannel, но это делается только для API 26+

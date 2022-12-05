@@ -24,7 +24,7 @@ public class Note implements Parcelable {
     };
     protected static final Random random = new Random();
     public static int LENGTH_BEGIN = 7;
-    private static ArrayList<Note> notes;
+    private static final ArrayList<Note> notes;
     private static int counter;
 
     static {
@@ -82,7 +82,7 @@ public class Note implements Parcelable {
     }
 
     public static void clearAll() {
-        notes = new ArrayList<Note>();
+        notes.clear();
     }
 
     public int getId(Note note) {

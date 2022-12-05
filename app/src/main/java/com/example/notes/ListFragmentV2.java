@@ -69,13 +69,12 @@ public class ListFragmentV2 extends Fragment {
                 // добавление нового элемента
                 data.addCardData(new CardData("Заметка " + data.size(),
                         String.format("Описание заметки %d", data.size()),
-                        pic, data.size() - 1, false));
+                        pic, data.size(), false));
 
                 SimpleDateFormat sdf = new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
 // on below line we are creating a variable
 // for current date and time and calling a simple date format in it.
                 String currentDateAndTime = sdf.format(new Date());
-
                 Note notea = new Note("Заметка " + (data.size() - 1), String.format("Описание заметки %d", data.size() - 1),
                         currentDateAndTime, new int[]{1, 1, 2023}, new int[]{8, 0}, pic);
                 Note.getNotes().add(notea);

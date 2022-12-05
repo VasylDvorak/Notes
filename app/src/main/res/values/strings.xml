@@ -49,6 +49,8 @@
     <string name="update">Изменить</string>
     <string name="delete">Удалить</string>
     <string name="correct_title">Скорректируйте заголовок</string>
+    <string name="empty">Пустая база данных</string>
+    <string name="error">Ошибка</string>
 
     <style name="StyleText">
         <item name="android:layout_width">match_parent</item>

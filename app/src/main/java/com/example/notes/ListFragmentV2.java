@@ -234,13 +234,7 @@ public class ListFragmentV2 extends Fragment {
         alert_dialog = new AlertDialog.Builder(getContext())
                 .setCustomTitle(title)
                 .setView(customView)
-                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.btnBack), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         alert_dialog.dismiss();

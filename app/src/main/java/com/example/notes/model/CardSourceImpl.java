@@ -1,16 +1,18 @@
-package com.example.notes;
+package com.example.notes.model;
 
-import static com.example.notes.Note.LENGTH_BEGIN;
+import static com.example.notes.model.Note.LENGTH_BEGIN;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+
+import com.example.notes.R;
 
 import java.util.ArrayList;
 
 public class CardSourceImpl implements CardsSource {
 
     public static ArrayList<CardData> dataSource;
-    protected static int[] pictures_global;
+    public static int[] pictures_global;
     private final Resources resources;
 
     public CardSourceImpl(Resources resources) {

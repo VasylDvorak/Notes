@@ -1,4 +1,4 @@
-package com.example.notes;
+package com.example.notes.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,6 +33,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.notes.R;
+import com.example.notes.presenter.adapter.ListFragmentV2;
+import com.example.notes.presenter.OnDialogListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -46,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int first_stile = 0;
     private static final int second_stile = 1;
     private static final int third_style = 2;
-    protected static int note_text_color, notes_text_color, notes_text_color_first;
+    protected static int note_text_color;
+    public static int notes_text_color;
+    public static int notes_text_color_first;
     private TextView headerTitleName, headerTitleProfession;
     private String UserName, UserProfession;
     private Snackbar snackbar;

@@ -1,4 +1,4 @@
-package com.example.notes;
+package com.example.notes.model;
 
 public class CardData {
     private final String title;

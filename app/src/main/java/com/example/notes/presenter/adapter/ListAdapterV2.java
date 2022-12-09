@@ -1,7 +1,7 @@
-package com.example.notes;
+package com.example.notes.presenter.adapter;
 
-import static com.example.notes.MainActivity.notes_text_color;
-import static com.example.notes.MainActivity.notes_text_color_first;
+import static com.example.notes.view.MainActivity.notes_text_color;
+import static com.example.notes.view.MainActivity.notes_text_color_first;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.notes.model.CardData;
+import com.example.notes.model.CardsSource;
+import com.example.notes.R;
+import com.example.notes.presenter.OnItemClickListener;
 
 import java.util.ArrayList;
 

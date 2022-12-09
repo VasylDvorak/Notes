@@ -1,4 +1,4 @@
-package com.example.notes;
+package com.example.notes.view;
 
 
 import android.app.AlertDialog;
@@ -22,6 +22,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.notes.R;
+import com.example.notes.model.Note;
+import com.example.notes.presenter.adapter.ListFragmentV2;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotesFragment extends Fragment {
@@ -66,10 +69,6 @@ public class NotesFragment extends Fragment {
         if (isLandscape() && (Note.getNotes().size() != 0))
             showLandNoteDetails(Note.getNotes().get(index));
 
-        FloatingActionButton btnOne = view.findViewById(R.id.about);
-        btnOne.setOnClickListener(v -> {
-            createOneButtonAlertDialog("О приложении");
-        });
     }
 
     private void showLandNoteDetails(Note note) {

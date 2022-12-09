@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".NotesFragment">
+    tools:context=".view.NotesFragment">
 
     <ScrollView
         android:id="@+id/scroll_list_names"
@@ -28,17 +28,5 @@
         android:layout_marginTop="@dimen/margin"
         android:layout_marginEnd="@dimen/margin"
         android:layout_marginBottom="@dimen/margin"
-        android:orientation="vertical">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:clickable="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/question" />
-    </LinearLayout>
+        android:orientation="vertical"/>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.notes;
+package com.example.notes.model;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -25,7 +25,7 @@ public class Note implements Parcelable {
             return new Note[i];
         }
     };
-    protected static final Random random = new Random();
+    public static final Random random = new Random();
     private static final ArrayList<Note> notes;
     public static int LENGTH_BEGIN = 7;
     private static int counter;
@@ -37,10 +37,10 @@ public class Note implements Parcelable {
         }
     }
 
-    int[] date;
-    int[] time;
+    public int[] date;
+    public int[] time;
     //  private int id;
-    String title;
+    public String title;
     String description;
     String creationDate;
     int picture_id;

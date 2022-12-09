@@ -1,10 +1,10 @@
-package com.example.notes;
+package com.example.notes.view;
 
 
-import static com.example.notes.CardSourceImpl.dataSource;
-import static com.example.notes.ListFragmentV2.KEY;
-import static com.example.notes.ListFragmentV2.sharedPreferences;
-import static com.example.notes.MainActivity.note_text_color;
+import static com.example.notes.model.CardSourceImpl.dataSource;
+import static com.example.notes.presenter.adapter.ListFragmentV2.KEY;
+import static com.example.notes.presenter.adapter.ListFragmentV2.sharedPreferences;
+import static com.example.notes.view.MainActivity.note_text_color;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,13 +28,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.notes.R;
+import com.example.notes.model.CardData;
+import com.example.notes.model.Note;
+import com.example.notes.presenter.ParentDateTimeFragment;
 import com.google.gson.GsonBuilder;
 
 
 public class NoteFragment extends Fragment {
     //  private OnDialogListener ColorListener;
     static final String SELECTED_NOTE = "note";
-    static int PDateTime;
+    public static int PDateTime;
     //  public String mListener;
     boolean title_was_changed;
     private int text_color;

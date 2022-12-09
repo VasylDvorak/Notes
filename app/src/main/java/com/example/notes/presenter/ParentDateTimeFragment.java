@@ -1,6 +1,6 @@
-package com.example.notes;
+package com.example.notes.presenter;
 
-import static com.example.notes.NoteFragment.PDateTime;
+import static com.example.notes.view.NoteFragment.PDateTime;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -17,13 +17,16 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.notes.Adapter.SectionPagerAdapter;
+import com.example.notes.view.DatePickerFragment;
+import com.example.notes.R;
+import com.example.notes.view.TimePickerFragment;
+import com.example.notes.model.Note;
 import com.google.android.material.tabs.TabLayout;
 
 public class ParentDateTimeFragment extends DialogFragment {
 
 
-    static final String SELECTED_NOTE = "note";
+    public static final String SELECTED_NOTE = "note";
     View myFragment;
     ViewPager viewPager;
     TabLayout tabLayout;

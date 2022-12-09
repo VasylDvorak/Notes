@@ -1,9 +1,9 @@
-package com.example.notes;
+package com.example.notes.presenter.adapter;
 
 
-import static com.example.notes.CardSourceImpl.pictures_global;
-import static com.example.notes.Note.random;
-import static com.example.notes.NotesFragment.index;
+import static com.example.notes.model.CardSourceImpl.pictures_global;
+import static com.example.notes.model.Note.random;
+import static com.example.notes.view.NotesFragment.index;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -36,6 +36,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notes.presenter.OnItemClickListener;
+import com.example.notes.view.NoteFragment;
+import com.example.notes.R;
+import com.example.notes.model.CardData;
+import com.example.notes.model.CardSourceImpl;
+import com.example.notes.model.CardsSource;
+import com.example.notes.model.Note;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

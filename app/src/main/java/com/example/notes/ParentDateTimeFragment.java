@@ -57,7 +57,8 @@ public class ParentDateTimeFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        myFragment = inflater.inflate(R.layout.fragment_parent_date_time, container, false);
+        myFragment = inflater.inflate(R.layout.fragment_parent_date_time,
+                container, false);
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         return myFragment;

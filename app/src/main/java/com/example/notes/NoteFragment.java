@@ -1,5 +1,9 @@
 package com.example.notes;
 
+
+import static com.example.notes.CardSourceImpl.dataSource;
+import static com.example.notes.ListFragmentV2.KEY;
+import static com.example.notes.ListFragmentV2.sharedPreferences;
 import static com.example.notes.MainActivity.note_text_color;
 
 import android.app.Activity;
@@ -23,6 +27,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.gson.GsonBuilder;
 
 
 public class NoteFragment extends Fragment {
@@ -71,6 +77,7 @@ public class NoteFragment extends Fragment {
 
         TextView time_date_alarm = view.findViewById(R.id.time_date_alarm_view);
         TextView tvDescription = view.findViewById(R.id.tvDescription);
+        //  sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         title_was_changed = false;
         if (arguments != null) {
             note = arguments.getParcelable(SELECTED_NOTE);
@@ -86,7 +93,20 @@ public class NoteFragment extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    note.setTitle(charSequence.toString());
+
+                    String new_title = charSequence.toString();
+                    note.setTitle(new_title);
+                    if (note.getId(note) >= 0) {
+                        dataSource.set(note.getId(note), new CardData(new_title,
+                                note.getDescription(), note.getCreationDate(),
+                                note.getPictureID(), note.getId(note),
+                                note.getLike()));
+                        String jsonCardDataAfterUpdate = new GsonBuilder().create()
+                                .toJson(dataSource);
+                        sharedPreferences.edit().putString(KEY, jsonCardDataAfterUpdate).apply();
+                    }
+
+
                     title_was_changed = true;
                     TextView rt = getActivity().findViewById(note.getId(note));
                     if (rt == null) {
@@ -113,7 +133,19 @@ public class NoteFragment extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    note.setDescription(charSequence.toString());
+                    String new_description = charSequence.toString();
+                    note.setDescription(new_description);
+                    if (note.getId(note) >= 0) {
+                        dataSource.set(note.getId(note),
+                                new CardData(note.getTitle(),
+                                        new_description, note.getCreationDate(),
+                                        note.getPictureID(), note.getId(note),
+                                        note.getLike()));
+                        String jsonCardDataAfterUpdate = new GsonBuilder()
+                                .create().toJson(dataSource);
+                        sharedPreferences.edit().putString(KEY, jsonCardDataAfterUpdate).apply();
+                    }
+
                 }
 
                 @Override
@@ -168,7 +200,8 @@ public class NoteFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 
-        Fragment CurrentFragment = requireActivity().getSupportFragmentManager().findFragmentByTag("NOTE_FRAGMENT");
+        Fragment CurrentFragment = requireActivity().getSupportFragmentManager()
+                .findFragmentByTag("NOTE_FRAGMENT");
 
         if ((!isLandscape()) && (menu != null) &&
                 (CurrentFragment != null && CurrentFragment.isVisible())) {

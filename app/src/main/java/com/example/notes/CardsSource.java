@@ -1,5 +1,7 @@
 package com.example.notes;
 
+import java.util.ArrayList;
+
 public interface CardsSource {
     CardData getCardData(int position);
 
@@ -12,4 +14,8 @@ public interface CardsSource {
     void addCardData(CardData cardData);
 
     void clearCardData();
+
+    void setNewData(ArrayList<CardData> dataSource);
+
+    ArrayList<CardData> getCardData();
 }

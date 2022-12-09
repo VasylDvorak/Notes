@@ -1,8 +1,11 @@
 package com.example.notes;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,8 +13,8 @@ import java.util.Date;
 import java.util.Random;
 
 public class Note implements Parcelable {
-
     public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public Note createFromParcel(Parcel parcel) {
             return new Note(parcel);
@@ -23,8 +26,8 @@ public class Note implements Parcelable {
         }
     };
     protected static final Random random = new Random();
-    public static int LENGTH_BEGIN = 7;
     private static final ArrayList<Note> notes;
+    public static int LENGTH_BEGIN = 7;
     private static int counter;
 
     static {
@@ -41,18 +44,22 @@ public class Note implements Parcelable {
     String description;
     String creationDate;
     int picture_id;
+    boolean like;
 
-    public Note(String title, String description, String creationDate, int[] date, int[] time, int picture_id) {
+    public Note(String title, String description, String creationDate,
+                int[] date, int[] time, int picture_id, boolean like) {
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.date = date;
         this.time = time;
         this.picture_id = picture_id;
+        this.like = like;
 
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     protected Note(Parcel parcel) {
         title = parcel.readString();
         description = parcel.readString();
@@ -60,6 +67,7 @@ public class Note implements Parcelable {
         date = parcel.createIntArray();
         time = parcel.createIntArray();
         picture_id = parcel.readInt();
+        like = parcel.readBoolean();
     }
 
     public static ArrayList<Note> getNotes() {
@@ -76,9 +84,10 @@ public class Note implements Parcelable {
 // for current date and time and calling a simple date format in it.
 
         String currentDateAndTime = sdf.format(new Date());
-        int[] date = new int[]{random.nextInt(31) + 1, random.nextInt(11) + 1, 2023 + random.nextInt(2)};
+        int[] date = new int[]{random.nextInt(31) + 1, random.nextInt(11) + 1
+                , 2023 + random.nextInt(2)};
         int[] time = new int[]{random.nextInt(24) + 1, random.nextInt(60) + 1};
-        return new Note(title, description, currentDateAndTime, date, time, 0);
+        return new Note(title, description, currentDateAndTime, date, time, 0, false);
     }
 
     public static void clearAll() {
@@ -159,6 +168,13 @@ public class Note implements Parcelable {
         parcel.writeIntArray(getDate());
         parcel.writeIntArray(getTime());
         parcel.writeInt(getPictureID());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            parcel.writeBoolean(getLike());
+        }
+    }
+
+    public boolean getLike() {
+        return like;
     }
 
 

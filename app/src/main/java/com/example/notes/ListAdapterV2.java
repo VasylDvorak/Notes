@@ -14,16 +14,23 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder> {
 
+    private final Fragment fragment;
     CardsSource dateSource;
     private OnItemClickListener itemClickListener;
-    private final Fragment fragment;
     private int menuPosition;
 
     public ListAdapterV2(CardsSource dateSource, Fragment fragment) {
         this.dateSource = dateSource;
         this.fragment = fragment;
+    }
+
+    public void setNewData(ArrayList<CardData> dataSource) {
+        this.dateSource.setNewData(dataSource);
+        notifyDataSetChanged();
     }
 
     public int getMenuPosition() {

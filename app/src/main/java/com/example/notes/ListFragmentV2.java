@@ -6,7 +6,9 @@ import static com.example.notes.Note.random;
 import static com.example.notes.NotesFragment.index;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,13 +36,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ListFragmentV2 extends Fragment {
+    public static final String KEY = "KEY";
     static final String SELECTED_NOTE = "none";
     private static final int DURATION = 2000;
+    public static SharedPreferences sharedPreferences;
     private Note note;
     private CardsSource data;
     private ListAdapterV2 adapter;
@@ -56,6 +66,10 @@ public class ListFragmentV2 extends Fragment {
         return new ListFragmentV2();
     }
 
+    public CardsSource getData() {
+        return data;
+    }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.cards_menu, menu);
@@ -63,26 +77,33 @@ public class ListFragmentV2 extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         int pic = pictures_global[random.nextInt(6) + 1];
         switch (item.getItemId()) {
             case R.id.action_add:
-                // добавление нового элемента
-                data.addCardData(new CardData("Заметка " + data.size(),
-                        String.format("Описание заметки %d", data.size()),
-                        pic, data.size(), false));
 
-                SimpleDateFormat sdf = new SimpleDateFormat("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
+
+                SimpleDateFormat sdf = new SimpleDateFormat
+                        ("'Дата\n'dd-MM-yyyy '\n\nи\n\nВремя\n'HH:mm:ss z");
 // on below line we are creating a variable
 // for current date and time and calling a simple date format in it.
                 String currentDateAndTime = sdf.format(new Date());
-                Note notea = new Note("Заметка " + (data.size() - 1), String.format("Описание заметки %d", data.size() - 1),
-                        currentDateAndTime, new int[]{1, 1, 2023}, new int[]{8, 0}, pic);
+                // добавление нового элемента
+                data.addCardData(new CardData("Заметка " + data.size(),
+                        String.format("Описание заметки %d", data.size()), currentDateAndTime,
+                        pic, data.size(), false));
+
+                Note notea = new Note("Заметка " + (data.size() - 1),
+                        String.format("Описание заметки %d", data.size() - 1),
+                        currentDateAndTime, new int[]{1, 1, 2023}, new int[]{8, 0}, pic, false);
                 Note.getNotes().add(notea);
 // нотификация добавления нового элемемента
                 adapter.notifyItemInserted(data.size() - 1);
                 // перлистываем список
                 recyclerView.scrollToPosition(data.size() - 1);
                 recyclerView.smoothScrollToPosition(data.size() - 1);
+                String jsonCardDataAfterAdd = new GsonBuilder().create().toJson(data.getCardData());
+                sharedPreferences.edit().putString(KEY, jsonCardDataAfterAdd).apply();
                 return true;
             case R.id.action_clear:
                 //чистка списка
@@ -90,6 +111,8 @@ public class ListFragmentV2 extends Fragment {
                 Note.clearAll();
                 // нотификация, измернение элементов
                 adapter.notifyDataSetChanged();
+                String jsonCardDataAfterClear = new GsonBuilder().create().toJson(data.getCardData());
+                sharedPreferences.edit().putString(KEY, jsonCardDataAfterClear).apply();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -122,7 +145,7 @@ public class ListFragmentV2 extends Fragment {
 
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_lines);
-        data = new CardSourceImpl(getResources()).init();
+        data = new CardSourceImpl(getResources()); //new CardSourceImpl(getResources()).init();
         initRecycleView();
     }
 
@@ -140,7 +163,33 @@ public class ListFragmentV2 extends Fragment {
         defaultItemAnimator.setAddDuration(DURATION);
         defaultItemAnimator.setRemoveDuration(DURATION);
         recyclerView.setItemAnimator(defaultItemAnimator);
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String savedData = sharedPreferences.getString(KEY, null);
+        if (savedData == null) {
+            Toast.makeText(getContext(), R.string.empty, Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                Type type = new TypeToken<List<CardData>>() {
+                }.getType();
+                ArrayList<CardData> data_source = new GsonBuilder().create()
+                        .fromJson(savedData, type);
+                adapter.setNewData(data_source);
+                Note.clearAll();
+                for (CardData from_database :
+                        data_source) {
 
+                    Note noteaa = new Note(from_database.getTitle(),
+                            from_database.getDescription(),
+                            from_database.getCurrentDateAndTime(),
+                            new int[]{1, 1, 2023}, new int[]{8, 0}, from_database.getPicture(),
+                            from_database.isLike());
+                    Note.getNotes().add(noteaa);
+                }
+
+            } catch (Exception e) {
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_LONG).show();
+            }
+        }
         adapter.setItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -151,7 +200,8 @@ public class ListFragmentV2 extends Fragment {
     }
 
     @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
+                                    @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater menuInflater = requireActivity().getMenuInflater();
         menuInflater.inflate(R.menu.card_menu, menu);
@@ -159,6 +209,8 @@ public class ListFragmentV2 extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+        //  getActivity().getSharedPreferences()
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         position = adapter.getMenuPosition();
 
         switch (item.getItemId()) {
@@ -166,11 +218,17 @@ public class ListFragmentV2 extends Fragment {
                 cardData = data.getCardData(position);
                 TextView update_title = getActivity().findViewById(cardData.getId());
                 showAlertDialogWithCustomView(update_title);
+
                 return true;
             case R.id.action_delete:
                 data.deleteCardData(position);
                 Note.getNotes().remove(position);
                 adapter.notifyItemRemoved(position);
+
+                String jsonCardDataAfterDelete = new GsonBuilder()
+                        .create().toJson(data.getCardData());
+                sharedPreferences.edit().putString(KEY, jsonCardDataAfterDelete).apply();
+
                 return true;
         }
         return super.onContextItemSelected(item);
@@ -220,7 +278,8 @@ public class ListFragmentV2 extends Fragment {
     }
 
     private void showAlertDialogWithCustomView(TextView textView) {
-        final View customView = getLayoutInflater().inflate(R.layout.alert_dialog_correct_title, null);
+        final View customView = getLayoutInflater()
+                .inflate(R.layout.alert_dialog_correct_title, null);
 
         TextView title = new TextView(getContext());
 // You Can Customise your Title here
@@ -250,16 +309,20 @@ public class ListFragmentV2 extends Fragment {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                textView.setText(s.toString());
-                TitleChanging(s.toString());
+                String strr = s.toString();
+                textView.setText(strr);
+                TitleChanging(strr);
             }
         });
     }
 
     private void TitleChanging(String str) {
         data.updateCardData(position, new CardData(str,
-                cardData.getDescription(),
+                cardData.getDescription(), cardData.getCurrentDateAndTime(),
                 cardData.getPicture(), cardData.getId(), cardData.isLike()));
+        adapter.notifyItemChanged(position);
+        String jsonCardDataAfterUpdate = new GsonBuilder().create().toJson(data.getCardData());
+        sharedPreferences.edit().putString(KEY, jsonCardDataAfterUpdate).apply();
         ArrayList<Note> notesd = Note.getNotes();
         Note noted = notesd.get(position);
         noted.title = str;

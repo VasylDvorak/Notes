@@ -6,32 +6,18 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CardSourceImpl implements CardsSource {
 
+    public static ArrayList<CardData> dataSource;
     protected static int[] pictures_global;
-    private final List<CardData> dataSource;
     private final Resources resources;
 
     public CardSourceImpl(Resources resources) {
         this.resources = resources;
         dataSource = new ArrayList<>(LENGTH_BEGIN);
-    }
-
-    public CardSourceImpl init() {
         pictures_global = getImageArray();
-        if (Note.getNotes().size() != 0)
-            for (int i = 0; i < Note.getNotes().size(); i++) {
-                dataSource.add(new CardData(Note.getNotes().get(i).getTitle(),
-                        Note.getNotes().get(i).getDescription(), pictures_global[i],
-                        Note.getNotes().get(i).getId(Note.getNotes().get(i)), false));
-                ArrayList<Note> notesd = Note.getNotes();
-                Note notef = notesd.get(i);
-                notef.picture_id = pictures_global[i];
-                Note.getNotes().set(i, notef);
-            }
-        return this;
+
     }
 
     private int[] getImageArray() {
@@ -73,4 +59,15 @@ public class CardSourceImpl implements CardsSource {
     public void clearCardData() {
         dataSource.clear();
     }
+
+    @Override
+    public void setNewData(ArrayList<CardData> dataSource) {
+        CardSourceImpl.dataSource = dataSource;
+    }
+
+    @Override
+    public ArrayList<CardData> getCardData() {
+        return dataSource;
+    }
+
 }

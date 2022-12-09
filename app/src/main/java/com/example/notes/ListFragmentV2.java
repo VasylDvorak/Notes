@@ -165,7 +165,9 @@ public class ListFragmentV2 extends Fragment {
                                     task.getResult().getDocuments();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         firebase_data = document.getData();
-                                        data = (CardsSource) firebase_data.get("NOTESF");
+                                        data
+                                                .setNewData((ArrayList<CardData>) firebase_data
+                                                        .get("NOTESF"));
                                     }
 
 

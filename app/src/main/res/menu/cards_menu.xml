@@ -13,4 +13,16 @@
         android:orderInCategory="10"
         android:title="@string/clear"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/send_to_firebase"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="10"
+        android:title="@string/send_to_firebase"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/obtain_from_firebase"
+        android:icon="@android:drawable/ic_notification_clear_all"
+        android:orderInCategory="10"
+        android:title="Загрузить из Firebase"
+        app:showAsAction="never" />
 </menu>

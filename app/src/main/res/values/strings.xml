@@ -51,6 +51,7 @@
     <string name="correct_title">Скорректируйте заголовок</string>
     <string name="empty">Пустая база данных</string>
     <string name="error">Ошибка</string>
+    <string name="send_to_firebase">Переслать в Firebase</string>
 
     <style name="StyleText">
         <item name="android:layout_width">match_parent</item>

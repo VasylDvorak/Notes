@@ -36,6 +36,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
@@ -43,7 +51,9 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListFragmentV2 extends Fragment {
     public static final String KEY = "KEY";
@@ -57,6 +67,8 @@ public class ListFragmentV2 extends Fragment {
     private AlertDialog alert_dialog;
     private int position;
     private CardData cardData;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Map<String, Object> firebase_data = new HashMap<>();
 
     public ListFragmentV2() {
         // Required empty public constructor
@@ -113,6 +125,59 @@ public class ListFragmentV2 extends Fragment {
                 adapter.notifyDataSetChanged();
                 String jsonCardDataAfterClear = new GsonBuilder().create().toJson(data.getCardData());
                 sharedPreferences.edit().putString(KEY, jsonCardDataAfterClear).apply();
+                return true;
+            case R.id.send_to_firebase:
+                firebase_data.clear();
+                firebase_data.put("NOTESF", data.getCardData());
+                db.collection("Notes")
+                        .add(firebase_data)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast toast = Toast.makeText(getActivity(),
+                                        "Заметки переслали в Firebase", Toast.LENGTH_LONG);
+                                toast.show();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast toast = Toast.makeText(getActivity(),
+                                        "Ошибка. Заметки не переслали в Firebase", Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        });
+
+                return true;
+            case R.id.obtain_from_firebase:
+                firebase_data.clear();
+                db.collection("users")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    Toast toast = Toast.makeText(getActivity(),
+                                            "Заметки получили из Firebase", Toast.LENGTH_LONG);
+                                    toast.show();
+                                    data.clearCardData();
+                                    task.getResult().getDocuments();
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        firebase_data = document.getData();
+                                        data = (CardsSource) firebase_data.get("NOTESF");
+                                    }
+
+
+                                } else {
+                                    Toast toast = Toast.makeText(getActivity(),
+                                            "Ошибка. Заметки не получили из Firebase",
+                                            Toast.LENGTH_LONG);
+                                    toast.show();
+                                }
+                            }
+                        });
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -328,4 +393,6 @@ public class ListFragmentV2 extends Fragment {
         noted.title = str;
         Note.getNotes().set(position, noted);
     }
+
+
 }

@@ -135,7 +135,8 @@ public class ListFragmentV2 extends Fragment {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast toast = Toast.makeText(getActivity(),
-                                        "Заметки переслали в Firebase", Toast.LENGTH_LONG);
+                                        getResources().getString(R.string.success_send_to_firebase)
+                                        , Toast.LENGTH_LONG);
                                 toast.show();
 
                             }
@@ -144,7 +145,8 @@ public class ListFragmentV2 extends Fragment {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast toast = Toast.makeText(getActivity(),
-                                        "Ошибка. Заметки не переслали в Firebase", Toast.LENGTH_LONG);
+                                        getResources().getString(R.string.error_send_to_firebase)
+                                        , Toast.LENGTH_LONG);
                                 toast.show();
                             }
                         });
@@ -159,21 +161,21 @@ public class ListFragmentV2 extends Fragment {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     Toast toast = Toast.makeText(getActivity(),
-                                            "Заметки получили из Firebase", Toast.LENGTH_LONG);
+                                            getResources().getString(R.string.obtain_from_Firebase)
+                                            , Toast.LENGTH_LONG);
                                     toast.show();
                                     data.clearCardData();
                                     task.getResult().getDocuments();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         firebase_data = document.getData();
-                                        data
-                                                .setNewData((ArrayList<CardData>) firebase_data
-                                                        .get("NOTESF"));
+                                        data.setNewData((ArrayList<CardData>) firebase_data
+                                                .get("NOTESF"));
                                     }
-
 
                                 } else {
                                     Toast toast = Toast.makeText(getActivity(),
-                                            "Ошибка. Заметки не получили из Firebase",
+                                            getResources()
+                                                    .getString(R.string.error_obtain_from_Firebase),
                                             Toast.LENGTH_LONG);
                                     toast.show();
                                 }

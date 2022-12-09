@@ -52,6 +52,11 @@
     <string name="empty">Пустая база данных</string>
     <string name="error">Ошибка</string>
     <string name="send_to_firebase">Переслать в Firebase</string>
+    <string name="obtain_from_firebase">Загрузить из Firebase</string>
+    <string name="success_send_to_firebase">Заметки переслали в Firebase</string>
+    <string name="error_send_to_firebase">Ошибка. Заметки не переслали в Firebase</string>
+    <string name="obtain_from_Firebase">Заметки получили из Firebase</string>
+    <string name="error_obtain_from_Firebase">Ошибка. Заметки не получили из Firebase</string>
 
     <style name="StyleText">
         <item name="android:layout_width">match_parent</item>

@@ -23,6 +23,6 @@
         android:id="@+id/obtain_from_firebase"
         android:icon="@android:drawable/ic_notification_clear_all"
         android:orderInCategory="10"
-        android:title="Загрузить из Firebase"
+        android:title="@string/obtain_from_firebase"
         app:showAsAction="never" />
 </menu>

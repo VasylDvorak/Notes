@@ -117,12 +117,7 @@ public class ListFragmentV2 extends Fragment {
                         currentDateAndTime, new int[]{1, 1, 2023}, new int[]{8, 0}, pic, false);
                 Note.getNotes().add(notea);
 // нотификация добавления нового элемемента
-                adapter.notifyItemInserted(data.size() - 1);
-                // перлистываем список
-                recyclerView.scrollToPosition(data.size() - 1);
-                recyclerView.smoothScrollToPosition(data.size() - 1);
-                String jsonCardDataAfterAdd = new GsonBuilder().create().toJson(data.getCardData());
-                sharedPreferences.edit().putString(KEY, jsonCardDataAfterAdd).apply();
+                adapter_notify();
                 return true;
             case R.id.action_clear:
                 //чистка списка
@@ -167,10 +162,6 @@ public class ListFragmentV2 extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    Toast toast = Toast.makeText(getActivity(),
-                                            getResources().getString(R.string.obtain_from_Firebase)
-                                            , Toast.LENGTH_LONG);
-                                    toast.show();
                                     data.clearCardData();
                                     task.getResult().getDocuments();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -178,6 +169,19 @@ public class ListFragmentV2 extends Fragment {
                                         data.setNewData((ArrayList<CardData>) firebase_data
                                                 .get("NOTESF"));
                                     }
+                                        if (data.getCardData().size() !=0){
+                                            adapter.setNewData(data.getCardData());
+                                            // перлистываем список
+                                            recyclerView.scrollToPosition(data.size() - 1);
+                                          //  recyclerView.smoothScrollToPosition(data.size() - 1);
+                                            String jsonCardDataAfterAdd = new GsonBuilder().create().toJson(data.getCardData());
+                                            sharedPreferences.edit().putString(KEY, jsonCardDataAfterAdd).apply();
+                                            Toast toast = Toast.makeText(getActivity(),
+                                                    getResources()
+                                                            .getString(R.string.obtain_from_Firebase)
+                                                    , Toast.LENGTH_LONG);
+                                            toast.show();
+                                        }
 
                                 } else {
                                     Toast toast = Toast.makeText(getActivity(),
@@ -404,6 +408,13 @@ public class ListFragmentV2 extends Fragment {
         noted.title = str;
         Note.getNotes().set(position, noted);
     }
-
+private void adapter_notify(){
+    adapter.notifyItemInserted(data.size() - 1);
+    // перлистываем список
+    recyclerView.scrollToPosition(data.size() - 1);
+    recyclerView.smoothScrollToPosition(data.size() - 1);
+    String jsonCardDataAfterAdd = new GsonBuilder().create().toJson(data.getCardData());
+    sharedPreferences.edit().putString(KEY, jsonCardDataAfterAdd).apply();
+}
 
 }

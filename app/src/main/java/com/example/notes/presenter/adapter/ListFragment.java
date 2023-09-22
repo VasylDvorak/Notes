@@ -117,7 +117,7 @@ public class ListFragment extends Fragment {
                         currentDateAndTime, new int[]{1, 1, 2023}, new int[]{8, 0}, pic, false);
                 Note.getNotes().add(notea);
 // нотификация добавления нового элемемента
-                adapter_notify();
+                adapterNotify();
                 return true;
             case R.id.action_clear:
                 //чистка списка
@@ -408,7 +408,7 @@ public class ListFragment extends Fragment {
         noted.title = str;
         Note.getNotes().set(position, noted);
     }
-private void adapter_notify(){
+private void adapterNotify(){
     adapter.notifyItemInserted(data.size() - 1);
     // перлистываем список
     recyclerView.scrollToPosition(data.size() - 1);

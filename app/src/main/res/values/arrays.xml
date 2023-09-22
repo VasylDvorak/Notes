@@ -1,8 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version= "1.0" encoding= "utf-8" ?>
 <resources>
-    <string-array name="notes_arr">
+    <string-array name="choose">
+        <item> @string/first_item</item>
+        <item> @string/second_item</item>
+        <item> @string/third_item</item>
+    </string-array>
+    <string name="first_item">Моя тема</string>
+    <string name="second_item">Тёмная тема</string>
+    <string name="third_item">Позеленевшая тема</string>
+
+    <string-array name="pictures">
+        <item>@drawable/nature1</item>
+        <item>@drawable/nature2</item>
+        <item>@drawable/nature3</item>
+        <item>@drawable/nature4</item>
+        <item>@drawable/nature5</item>
+        <item>@drawable/nature6</item>
+        <item>@drawable/nature7</item>
 
     </string-array>
-
-
 </resources>

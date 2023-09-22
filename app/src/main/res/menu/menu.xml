@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/Search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_sort"
+        android:title="@string/Sort"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/change_theme"
+        android:title="@string/Change_theme"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/exit_from_notes"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="@string/Exit_from_notes"
+        app:showAsAction="always" />
+</menu>

@@ -1,31 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><!-- это макет для альбомной ориентации -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
 
-    <ScrollView
-        android:id="@+id/scroll_list_names"
-        android:layout_width="0px"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/set_text_toast"
+            app:subtitle="@string/subtitle"
+            app:subtitleTextColor="@color/teal_200"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/color_time_date" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:scrollbars="vertical">
+        android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
+            android:id="@+id/notes_container"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-    <View
-        android:layout_width="5mm"
-        android:layout_height="1sp" />
-    <!-- Здесь будет выбранная заметка -->
-    <FrameLayout
-        android:id="@+id/notes_container"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?android:attr/detailsElementBackground" />
+        <View
+            android:id="@+id/void_view"
+            android:layout_width="5mm"
+            android:layout_height="1sp" />
+
+        <FrameLayout
+            android:id="@+id/note_container"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5" />
+
+    </LinearLayout>
 </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

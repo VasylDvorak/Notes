@@ -62,14 +62,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListFragmentV2 extends Fragment {
+public class ListFragment extends Fragment {
     public static final String KEY = "KEY";
     static final String SELECTED_NOTE = "none";
     private static final int DURATION = 2000;
     public static SharedPreferences sharedPreferences;
     private Note note;
     private CardsSource data;
-    private ListAdapterV2 adapter;
+    private ListAdapter adapter;
     private RecyclerView recyclerView;
     private AlertDialog alert_dialog;
     private int position;
@@ -77,12 +77,12 @@ public class ListFragmentV2 extends Fragment {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Map<String, Object> firebase_data = new HashMap<>();
 
-    public ListFragmentV2() {
+    public ListFragment() {
         // Required empty public constructor
     }
 
-    public static ListFragmentV2 newInstance() {
-        return new ListFragmentV2();
+    public static ListFragment newInstance() {
+        return new ListFragment();
     }
 
     public CardsSource getData() {
@@ -233,7 +233,7 @@ public class ListFragmentV2 extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         // ListAdapterV2 listAdapter = new ListAdapterV2(data);
-        adapter = new ListAdapterV2(data, this);
+        adapter = new ListAdapter(data, this);
         recyclerView.setAdapter(adapter);
         DividerItemDecoration itemDecoration = new
                 DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);

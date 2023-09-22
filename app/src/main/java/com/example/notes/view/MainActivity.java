@@ -34,7 +34,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.notes.R;
-import com.example.notes.presenter.adapter.ListFragmentV2;
+import com.example.notes.presenter.adapter.ListFragment;
 import com.example.notes.presenter.OnDialogListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
@@ -431,7 +431,7 @@ public class MainActivity extends AppCompatActivity {
         if (first != 0) {
             MainActivity.this.getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.data_container, ListFragmentV2.newInstance())
+                    .replace(R.id.data_container, ListFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
         }

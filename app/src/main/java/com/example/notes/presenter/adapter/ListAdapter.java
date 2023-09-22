@@ -21,14 +21,14 @@ import com.example.notes.presenter.OnItemClickListener;
 
 import java.util.ArrayList;
 
-public class ListAdapterV2 extends RecyclerView.Adapter<ListAdapterV2.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private final Fragment fragment;
     CardsSource dateSource;
     private OnItemClickListener itemClickListener;
     private int menuPosition;
 
-    public ListAdapterV2(CardsSource dateSource, Fragment fragment) {
+    public ListAdapter(CardsSource dateSource, Fragment fragment) {
         this.dateSource = dateSource;
         this.fragment = fragment;
     }

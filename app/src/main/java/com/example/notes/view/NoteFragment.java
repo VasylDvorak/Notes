@@ -2,8 +2,8 @@ package com.example.notes.view;
 
 
 import static com.example.notes.model.CardSourceImpl.dataSource;
-import static com.example.notes.presenter.adapter.ListFragmentV2.KEY;
-import static com.example.notes.presenter.adapter.ListFragmentV2.sharedPreferences;
+import static com.example.notes.presenter.adapter.ListFragment.KEY;
+import static com.example.notes.presenter.adapter.ListFragment.sharedPreferences;
 import static com.example.notes.view.MainActivity.note_text_color;
 
 import android.app.Activity;

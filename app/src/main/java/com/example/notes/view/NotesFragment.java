@@ -24,8 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.notes.R;
 import com.example.notes.model.Note;
-import com.example.notes.presenter.adapter.ListFragmentV2;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.notes.presenter.adapter.ListFragment;
 
 public class NotesFragment extends Fragment {
     static final String SELECTED_NOTE = "none";
@@ -89,7 +88,7 @@ public class NotesFragment extends Fragment {
 
     private void initNotes(View view) {
 
-        addFragment(ListFragmentV2.newInstance());
+        addFragment(ListFragment.newInstance());
 
     }
 
